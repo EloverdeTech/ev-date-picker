@@ -19,3 +19,6 @@ public_api.js.map
 
 # compiled output
 /dist
+
+# misc
+/.angular/cache

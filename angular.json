@@ -1,0 +1,25 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "lib",
+    "projects": {
+        "ev-date-picker": {
+            "root": "lib/ev-date-picker",
+            "sourceRoot": "lib/ev-date-picker/src",
+            "projectType": "library",
+            "prefix": "lib",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:ng-packagr",
+                    "options": {
+                        "tsConfig": "lib/ev-date-picker/tsconfig.lib.json",
+                        "project": "lib/ev-date-picker/ng-package.json"
+                    }
+                }
+            }
+        }
+    },
+    "cli": {
+        "analytics": false
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "ev-date-picker",
+    "description": "Angular 16+ wrapper for flatpickr",
+    "version": "1.0.0",
+    "license": "MIT",
+    "dependencies": {},
+    "peerDependencies": {
+        "@angular/common": ">=16.0.0",
+        "@angular/core": ">=16.0.0",
+        "flatpickr": ">=4.6.13"
+    }
+}

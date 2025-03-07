@@ -1,22 +1,30 @@
 {
+	"compileOnSave": false,
 	"compilerOptions": {
-		"noImplicitAny": true,
-		"module": "commonjs",
-		"target": "es5",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"moduleResolution": "node",
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
 		"sourceMap": true,
 		"declaration": false,
+		"module": "es2015",
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "ES2022",
+		"typeRoots": [
+			"node_modules/@types"
+		],
 		"lib": [
-			"es2015",
+			"es2018",
 			"dom"
-		]
-	},
-	"files": [
-		"public_api.ts"
-	],
-	"exclude": [
-		"node_modules"
-	]
+		],
+		"paths": {
+			"ev-date-picker": [
+				"dist/ev-date-picker"
+			],
+			"ev-date-picker/*": [
+				"dist/ev-date-picker/*"
+			]
+		},
+		"useDefineForClassFields": false
+	}
 }

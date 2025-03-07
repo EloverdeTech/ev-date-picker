@@ -5,31 +5,31 @@ import {
 import { ControlContainer, FormControl, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FlatpickrEvent } from './flatpickr-event.interface';
-import { FlatpickrInstance } from './flatpickr-instance';
+import { FlatpickrInstance } from './flatpickr-instance.interface';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 
-@Directive({ selector: '[flatpickr]', exportAs: 'ng2-flatpickr' })
-export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, OnChanges {
+@Directive({ selector: '[flatpickr]', exportAs: 'ev-date-picker' })
+export class EvDatePickerDirective implements AfterViewInit, OnDestroy, OnInit, OnChanges {
 	/**
 	 * The flatpickr configuration as a single object of values.
 	 *
 	 * See https://chmln.github.io/flatpickr/options/ for full list.
 	 */
-	@Input( 'flatpickr' ) public flatpickrOptions: FlatpickrOptions;
+	@Input('flatpickr') public flatpickrOptions: FlatpickrOptions;
 
 	/**
 	 * Placeholder for input field.
 	 *
 	 * Default:  null
 	 */
-	@Input( 'placeholder' ) public placeholder: string;
+	@Input('placeholder') public placeholder: string;
 
 	/**
 	 * Exactly the same as date format, but for the altInput field.
 	 *
 	 * Default:  "F j, Y"
 	 */
-	@Input( 'altFormat' ) public flatpickrAltFormat: string;
+	@Input('altFormat') public flatpickrAltFormat: string;
 
 	/**
 	 * Show the user a readable date (as per altFormat), but return something
@@ -37,7 +37,7 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  false
 	 */
-	@Input( 'altInput' ) public flatpickrAltInput: boolean;
+	@Input('altInput') public flatpickrAltInput: boolean;
 
 	/**
 	 * This class will be added to the input element created by the altInput
@@ -45,7 +45,7 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  ""
 	 */
-	@Input( 'altInputClass' ) public flatpickrAltInputClass: string;
+	@Input('altInputClass') public flatpickrAltInputClass: string;
 
 	/**
 	 * Allows the user to enter a date directly input the input field. By
@@ -53,14 +53,14 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  false
 	 */
-	@Input( 'allowInput' ) public flatpickrAllowInput: boolean;
+	@Input('allowInput') public flatpickrAllowInput: boolean;
 
 	/**
 	 * Instead of body, appends the calendar to the specified node instead.
 	 *
 	 * Default:  null
 	 */
-	@Input( 'appendTo' ) public flatpickrAppendTo: any; // HTMLElement
+	@Input('appendTo') public flatpickrAppendTo: any; // HTMLElement
 
 	/**
 	 * Whether clicking on the input should open the picker.
@@ -69,7 +69,7 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  true
 	 */
-	@Input( 'clickOpens' ) public flatpickrClickOpens: boolean;
+	@Input('clickOpens') public flatpickrClickOpens: boolean;
 
 	/**
 	 * A string of characters which are used to define how the date will be
@@ -78,7 +78,7 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  "Y-m-d"
 	 */
-	@Input( 'dateFormat' ) public flatpickrDateFormat: string;
+	@Input('dateFormat') public flatpickrDateFormat: string;
 
 	/**
 	 * Sets the initial selected date(s).
@@ -90,7 +90,7 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  null
 	 */
-	@Input( 'defaultDate' ) public flatpickrDefaultDate: string | Date;
+	@Input('defaultDate') public flatpickrDefaultDate: string | Date;
 
 	/**
 	 * Disable an array of specific dates, date ranges, or functions to disable
@@ -98,7 +98,7 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  []
 	 */
-	@Input( 'disable' ) public flatpickrDisable: string[] | Date[];
+	@Input('disable') public flatpickrDisable: string[] | Date[];
 
 	/**
 	 * Set disableMobile to true to always use the non-native picker. By
@@ -107,7 +107,7 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  false
 	 */
-	@Input( 'disableMobile' ) public flatpickrDisableMobile: boolean;
+	@Input('disableMobile') public flatpickrDisableMobile: boolean;
 
 	/**
 	 * Enable an array of specific dates, date ranges, or functions to enable
@@ -115,77 +115,77 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  []
 	 */
-	@Input( 'enable' ) public flatpickrEnable: string[] | Date[];
+	@Input('enable') public flatpickrEnable: string[] | Date[];
 
 	/**
 	 * Enables time picker.
 	 *
 	 * Default:  false
 	 */
-	@Input( 'enableTime' ) public flatpickrEnableTime: boolean;
+	@Input('enableTime') public flatpickrEnableTime: boolean;
 
 	/**
 	 * Enables seconds in the time picker.
 	 *
 	 * Default:  false
 	 */
-	@Input( 'enableSeconds' ) public flatpickrEnableSeconds: boolean;
+	@Input('enableSeconds') public flatpickrEnableSeconds: boolean;
 
 	/**
 	 * Adjusts the step for the hour input (incl. scrolling).
 	 *
 	 * Default:  1
 	 */
-	@Input( 'hourIncrement' ) public flatpickrHourIncrement: number;
+	@Input('hourIncrement') public flatpickrHourIncrement: number;
 
 	/**
 	 * Displays the calendar inline.
 	 *
 	 * Default:  false
 	 */
-	@Input( 'inline' ) public flatpickrInline: boolean;
+	@Input('inline') public flatpickrInline: boolean;
 
 	/**
 	 * Use a specific locale for the flatpickr instance.
 	 *
 	 * Default:  null
 	 */
-	@Input( 'locale' ) public flatpickrLocale: Object;
+	@Input('locale') public flatpickrLocale: Object;
 
 	/**
 	 * The maximum date that a user can pick to (inclusive).
 	 *
 	 * Default:  null
 	 */
-	@Input( 'maxDate' ) public flatpickrMaxDate: string | Date;
+	@Input('maxDate') public flatpickrMaxDate: string | Date;
 
 	/**
 	 * The minimum date that a user can start picking from (inclusive).
 	 *
 	 * Default:  null
 	 */
-	@Input( 'minDate' ) public flatpickrMinDate: string | Date;
+	@Input('minDate') public flatpickrMinDate: string | Date;
 
 	/**
 	 * Adjusts the step for the minute input (incl. scrolling).
 	 *
 	 * Default:  5
 	 */
-	@Input( 'minuteIncrement' ) public flatpickrMinuteIncrement: number;
+	@Input('minuteIncrement') public flatpickrMinuteIncrement: number;
 
 	/**
 	 * "single", "multiple", or "range"
 	 *
 	 * Default:  "single"
 	 */
-	@Input( 'mode' ) public flatpickrMode: string;
+	@Input('mode') public flatpickrMode: string;
 
 	/**
 	 * HTML for the arrow icon, used to switch months.
 	 *
 	 * Default:  ">"
 	 */
-	@Input( 'nextArrow' ) public flatpickrNextArrow: string;
+	@Input('nextArrow') public flatpickrNextArrow: string;
 
 	/**
 	 * Hides the day selection in calendar. Use it along with enableTime to
@@ -193,28 +193,28 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  false
 	 */
-	@Input( 'noCalendar' ) public flatpickrNoCalendar: boolean;
+	@Input('noCalendar') public flatpickrNoCalendar: boolean;
 
 	/**
 	 * Function that expects a date string and must return a Date object.
 	 *
 	 * Default:  false
 	 */
-	@Input( 'parseDate' ) public flatpickrParseDate: Function;
+	@Input('parseDate') public flatpickrParseDate: Function;
 
 	/**
 	 * HTML for the left arrow icon.
 	 *
 	 * Default:  "<"
 	 */
-	@Input( 'prevArrow' ) public flatpickrPrevArrow: string;
+	@Input('prevArrow') public flatpickrPrevArrow: string;
 
 	/**
 	 * Show the month using the shorthand version (ie, Sep instead of September).
 	 *
 	 * Default:  false
 	 */
-	@Input( 'shorthandCurrentMonth' ) public flatpickrShorthandCurrentMonth: boolean;
+	@Input('shorthandCurrentMonth') public flatpickrShorthandCurrentMonth: boolean;
 
 	/**
 	 * Position the calendar inside the wrapper and next to the input element
@@ -222,61 +222,61 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 *
 	 * Default:  false
 	 */
-	@Input( 'static' ) public flatpickrStatic: boolean;
+	@Input('static') public flatpickrStatic: boolean;
 
 	/**
 	 * Displays time picker in 24 hour mode without AM/PM selection when enabled.
 	 *
 	 * Default:  false
 	 */
-	@Input( 'time_24hr' ) public flatpickrTime_24hr: boolean;
+	@Input('time_24hr') public flatpickrTime_24hr: boolean;
 
-	@Input( 'utc' ) public flatpickrUtc: boolean;
+	@Input('utc') public flatpickrUtc: boolean;
 
 	/**
 	 * Enables display of week numbers in calendar.
 	 *
 	 * Default:  false
 	 */
-	@Input( 'weekNumbers' ) public flatpickrWeekNumbers: boolean;
+	@Input('weekNumbers') public flatpickrWeekNumbers: boolean;
 
 	/**
 	 * Custom elements and input groups.
 	 *
 	 * Default:  false
 	 */
-	@Input( 'wrap' ) public flatpickrWrap: boolean;
+	@Input('wrap') public flatpickrWrap: boolean;
 
 	/**
 	 * onChange gets triggered when the user selects a date, or changes the time on a selected date.
 	 *
 	 * Default:  null
 	 */
-	@Output( 'onChange' ) public flatpickrOnChange: EventEmitter<FlatpickrEvent> = new EventEmitter();
+	@Output('onChange') public flatpickrOnChange: EventEmitter<FlatpickrEvent> = new EventEmitter();
 
 	/**
 	 * onClose gets triggered when the calendar is closed.
 	 *
 	 * Default:  null
 	 */
-	@Output( 'onClose' ) public flatpickrOnClose: EventEmitter<FlatpickrEvent> = new EventEmitter();
+	@Output('onClose') public flatpickrOnClose: EventEmitter<FlatpickrEvent> = new EventEmitter();
 
 	/**
 	 * onOpen gets triggered when the calendar is opened.
 	 *
 	 * Default:  null
 	 */
-	@Output( 'onOpen' ) public flatpickrOnOpen: EventEmitter<FlatpickrEvent> = new EventEmitter();
+	@Output('onOpen') public flatpickrOnOpen: EventEmitter<FlatpickrEvent> = new EventEmitter();
 
 	/**
 	 * onReady gets triggered once the calendar is in a ready state.
 	 *
 	 * Default:  null
 	 */
-	@Output( 'onReady' ) public flatpickrOnReady: EventEmitter<FlatpickrEvent> = new EventEmitter();
+	@Output('onReady') public flatpickrOnReady: EventEmitter<FlatpickrEvent> = new EventEmitter();
 
 	/** Allow double-clicking on the control to open/close it. */
-	@HostListener( 'dblclick' )
+	@HostListener('dblclick')
 	public onClick() {
 		this.flatpickr.toggle();
 	}
@@ -290,14 +290,14 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	protected formControlListener: Subscription;
 
 	/** Allow access properties using index notation */
-	[key:string]: any;
+	[key: string]: any;
 
 	constructor(
 		protected parent: ControlContainer,
 		protected ngControl: NgControl,
 		protected element: ElementRef,
 		protected renderer: Renderer2
-	) {}
+	) { }
 
 	get control(): FormControl {
 		return this.parent ? this.parent.formDirective.getControl(this.ngControl) : null;
@@ -313,20 +313,20 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 		}
 
 		if (this.flatpickrOptions.wrap) {
-			this.renderer.setAttribute( this.element.nativeElement, 'data-input', '' );
+			this.renderer.setAttribute(this.element.nativeElement, 'data-input', '');
 			nativeElement = nativeElement.parentNode;
 		}
 
-		this.flatpickr = <FlatpickrInstance>nativeElement.flatpickr( this.flatpickrOptions );
+		this.flatpickr = <FlatpickrInstance>nativeElement.flatpickr(this.flatpickrOptions);
 	}
 
-	ngOnChanges( changes: SimpleChanges ) {
-		if( this.flatpickr
+	ngOnChanges(changes: SimpleChanges) {
+		if (this.flatpickr
 			&& this.flatpickrAltInput
-			&& changes.hasOwnProperty( 'placeholder' ) 
-			&& changes[ 'placeholder' ].currentValue ) {
-				this.flatpickr.altInput.setAttribute( 'placeholder', changes[ 'placeholder' ].currentValue );
-			}
+			&& changes.hasOwnProperty('placeholder')
+			&& changes['placeholder'].currentValue) {
+			this.flatpickr.altInput.setAttribute('placeholder', changes['placeholder'].currentValue);
+		}
 	}
 
 	ngOnDestroy() {
@@ -389,28 +389,28 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 		};
 
 		// Remove unset properties
-		Object.keys( this.flatpickrOptions ).forEach( ( key: string ) => {
+		Object.keys(this.flatpickrOptions).forEach((key: string) => {
 			(this.flatpickrOptions[key] === undefined) &&
 				delete this.flatpickrOptions[key];
-		} );
+		});
 
 		if (this.control) {
 			this.formControlListener = this.control.valueChanges
-				.subscribe( ( value: any ) => {
-					if ( !( value instanceof Date ) ) {
+				.subscribe((value: any) => {
+					if (!(value instanceof Date)) {
 						// Quietly update the value of the form control to be a
 						// Date object. This avoids any external subscribers
 						// from being notified a second time (once for the user
 						// initiated event, and once for our conversion to
 						// Date()).
-						this.control.setValue( new Date( '' + value ), {
+						this.control.setValue(new Date('' + value), {
 							onlySelf: true,
 							emitEvent: false,
 							emitModelToViewChange: false,
 							emitViewToModelChange: false
-						} );
+						});
 					}
-				} );
+				});
 		}
 	}
 
@@ -418,17 +418,17 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 * Fire off the event emitter for the directive element, and also for the
 	 * global onChange callback, if defined.
 	 */
-	protected eventOnChange( selectedDates: Date[], dateStr: string, instance: Object ): void {
+	protected eventOnChange(selectedDates: Date[], dateStr: string, instance: Object): void {
 		let event: FlatpickrEvent = {
 			selectedDates: selectedDates,
 			dateStr: dateStr,
 			instance: instance
 		};
-		if ( this.flatpickrOnChange ) {
-			this.flatpickrOnChange.emit( event );
+		if (this.flatpickrOnChange) {
+			this.flatpickrOnChange.emit(event);
 		}
-		if( this.globalOnChange ) {
-			this.globalOnChange( event );
+		if (this.globalOnChange) {
+			this.globalOnChange(event);
 		}
 	}
 
@@ -436,17 +436,17 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 * Fire off the event emitter for the directive element, and also for the
 	 * global onClose callback, if defined.
 	 */
-	protected eventOnClose( selectedDates: Date[], dateStr: string, instance: Object ): void {
+	protected eventOnClose(selectedDates: Date[], dateStr: string, instance: Object): void {
 		let event: FlatpickrEvent = {
 			selectedDates: selectedDates,
 			dateStr: dateStr,
 			instance: instance
 		};
-		if ( this.flatpickrOnClose ) {
-			this.flatpickrOnClose.emit( event );
+		if (this.flatpickrOnClose) {
+			this.flatpickrOnClose.emit(event);
 		}
-		if( this.globalOnClose ) {
-			this.globalOnClose( event );
+		if (this.globalOnClose) {
+			this.globalOnClose(event);
 		}
 	}
 
@@ -454,17 +454,17 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 * Fire off the event emitter for the directive element, and also for the
 	 * global onOpen callback, if defined.
 	 */
-	protected eventOnOpen( selectedDates: Date[], dateStr: string, instance: Object ): void {
+	protected eventOnOpen(selectedDates: Date[], dateStr: string, instance: Object): void {
 		let event: FlatpickrEvent = {
 			selectedDates: selectedDates,
 			dateStr: dateStr,
 			instance: instance
 		};
-		if ( this.flatpickrOnOpen ) {
-			this.flatpickrOnOpen.emit( event );
+		if (this.flatpickrOnOpen) {
+			this.flatpickrOnOpen.emit(event);
 		}
-		if( this.globalOnOpen ) {
-			this.globalOnOpen( event );
+		if (this.globalOnOpen) {
+			this.globalOnOpen(event);
 		}
 	}
 
@@ -472,17 +472,17 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 * Fire off the event emitter for the directive element, and also for the
 	 * global onReady callback, if defined.
 	 */
-	protected eventOnReady( selectedDates: Date[], dateStr: string, instance: Object ): void {
+	protected eventOnReady(selectedDates: Date[], dateStr: string, instance: Object): void {
 		let event: FlatpickrEvent = {
 			selectedDates: selectedDates,
 			dateStr: dateStr,
 			instance: instance
 		};
-		if ( this.flatpickrOnReady ) {
-			this.flatpickrOnReady.emit( event );
+		if (this.flatpickrOnReady) {
+			this.flatpickrOnReady.emit(event);
 		}
-		if( this.globalOnReady ) {
-			this.globalOnReady( event );
+		if (this.globalOnReady) {
+			this.globalOnReady(event);
 		}
 	}
 
@@ -490,13 +490,13 @@ export class Ng2FlatpickrDirective implements AfterViewInit, OnDestroy, OnInit, 
 	 * Return the configuration value for option {option}, or {defaultValue} if it
 	 * doesn't exist.
 	 */
-	protected getOption( option: string, defaultValue?: any ): any {
-		let localName = 'flatpickr' + option.substring( 0, 1 ).toUpperCase()
-			+ option.substring( 1 );
+	protected getOption(option: string, defaultValue?: any): any {
+		let localName = 'flatpickr' + option.substring(0, 1).toUpperCase()
+			+ option.substring(1);
 
-		if ( typeof this[localName] !== 'undefined' ) {
+		if (typeof this[localName] !== 'undefined') {
 			return this[localName];
-		} else if ( typeof this.flatpickrOptions[option] !== 'undefined' ) {
+		} else if (typeof this.flatpickrOptions[option] !== 'undefined') {
 			return this.flatpickrOptions[option];
 		} else {
 			return defaultValue;

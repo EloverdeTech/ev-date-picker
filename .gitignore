@@ -16,3 +16,6 @@ public_api.js.map
 
 # IDE
 .vscode
+
+# compiled output
+/dist

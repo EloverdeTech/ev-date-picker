@@ -1,4 +1,4 @@
-export class FlatpickrInstance {
+export interface FlatpickrInstance {
 	/** The array of selected dates (Date objects). */
 	selectedDates: Date[];
 	/** The year currently displayed on the calendar. */

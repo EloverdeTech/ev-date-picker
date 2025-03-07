@@ -2,17 +2,11 @@ import { Component, ViewChild, AfterViewInit, forwardRef, Input, OnChanges, Simp
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 
-declare var require: any;
-
-if (typeof window !== 'undefined') {
-	require('flatpickr');
-}
-
 @Component({
 	selector: 'ev-date-picker',
 	template: `
-		<div class="ev-date-picker-input-container" #flatpickr>
-			<input *ngIf="!hideButton" class="ev-date-picker-input {{ addClass }}" [placeholder]="placeholder" [tabindex]="tabindex" type="text" (focus)="onFocus($event)" data-input>
+		<div class="flex w-full h-full items-center" #flatpickr>
+			<input *ngIf="!hideButton" class="block w-full h-full {{ addClass }}" [placeholder]="placeholder" [tabindex]="tabindex" type="text" (focus)="onFocus($event)" data-input>
 			<ng-content></ng-content>
 		</div>
 		`,

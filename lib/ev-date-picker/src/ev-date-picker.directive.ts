@@ -5,7 +5,7 @@ import {
 import { ControlContainer, FormControl, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FlatpickrEvent } from './flatpickr-event.interface';
-import { FlatpickrInstance } from './flatpickr-instance';
+import { FlatpickrInstance } from './flatpickr-instance.interface';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 
 @Directive({ selector: '[flatpickr]', exportAs: 'ev-date-picker' })
